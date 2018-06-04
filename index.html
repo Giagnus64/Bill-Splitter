@@ -7,11 +7,141 @@
 	<title>Bill Splitter</title>
 </head>
 <body>
-	<h1>Bill Splitter</h1>
+	<div class="intro">
+		<h1>Bill Splitter</h1>
+		<input type="button" id="clear-fields" class="btn btn-right"value="Restart Calculation">
+		<p>Enter the amount of people splitting the bill in the form below. A new form will pop up for each person you are splitting with. If they have more than 3 items, click the "Add item" button until you have enough inputs for every item. Afterwards, enter your state for a tax calculation, or if you have a different tip percentage, enter that into the second input in the tax section. Some states have different tax amounts for alcoholic drinks and food, so if you have a unique situation, or just want to split the tax evenly, simply enter the <strong>amount</strong> in the third input. When all of your information is entered, hit the large submit button at the bottom of the page. </p>
+	</div>
 
-	<form action="">
+	
+	<div class="intro-form">
+		<p>How many people are splitting the bill?</p>
+		<input type="text" class="person-amount" name="person-amount">
+		<input type="button" id ="generate-forms" class="btn btn-large" value="Generate Forms">
+	</div>
+
 		
+
+	<!--form that ask how many people are splitting?
+		creates forms based on that number with proper classes
+		make a button that says add item
+		bottom of form dropdown with states for tax
+		dropdown for tips (maybe just 20%)-->
+
+		<form action="" class="person1">
+			<div>
+				<label for="name">Name:</label>
+				<input type="text" class="name" name="name" placeholder="Name">
+			</div>
+			<div>
+				<label for="item1">Item 1:</label>
+				<input type="text" class="item" name="item1">
+			</div>
+			<div>
+				<label for="item2">Item 2:</label>
+				<input type="text" class="item" name="item2">
+			</div>
+			<div>
+				<label for="item3">Item 3:</label>
+				<input type="text" class="item" name="item2">
+			</div>
+			<input type="button" id="add-item" class="btn" value="Add Item">
+		</form>
+
+<div class="shared-tax-tip">
+	<form action="" class="tax-tip">
+		<div class="shared-items>"
+			<label for="shared1">Shared Item 1:</label>
+			<input type="text" class="shared" name="shared1">
+			<input type="button" id="add-shared" class="btn" value="Add Shared Item">
+		</div>
+		<div class="tax-box">
+			<label for="tax-state">State(for tax)? </label>
+			<input type="text" class="state-type" name="tax-state" list="stateList" placeholder="Select or Type State">
+			<datalist id="stateList">
+  				<option value="Alabama">Alabama</option>
+				<option value="Alaska">Alaska</option>
+				<option value="Arizona">Arizona</option>
+				<option value="Arkansas">Arkansas</option>
+				<option value="California">California</option>
+				<option value="Colorado">Colorado</option>
+				<option value="Connecticut">Connecticut</option>
+				<option value="District of Columbia">District of Columbia</option>
+				<option value="Delaware">Delaware</option>
+				<option value="Florida">Florida</option>
+				<option value="Georgia">Georgia</option>
+				<option value="Hawaii">Hawaii</option>
+				<option value="Idaho">Idaho</option>
+				<option value="Illinois">Illinois</option>
+				<option value="Indiana">Indiana</option>
+				<option value="Iowa">Iowa</option>
+				<option value="Kansas">Kansas</option>
+				<option value="Kentucky">Kentucky</option>
+				<option value="Louisiana">Louisiana</option>
+				<option value="Maine">Maine</option>
+				<option value="Maryland">Maryland</option>
+				<option value="Massachusetts">Massachusetts</option>
+				<option value="Michigan">Michigan</option>
+				<option value="Minnesota">Minnesota</option>
+				<option value="Mississippi">Mississippi</option>
+				<option value="Missouri">Missouri</option>
+				<option value="Montana">Montana</option>
+				<option value="Nebraska">Nebraska</option>
+				<option value="Nevada">Nevada</option>
+				<option value="New Hampshire">New Hampshire</option>
+				<option value="New Jersey">New Jersey</option>
+				<option value="New Mexico">New Mexico</option>
+				<option value="New York">New York</option>
+				<option value="North Carolina">North Carolina</option>
+				<option value="North Dakota">North Dakota</option>
+				<option value="Ohio">Ohio</option>
+				<option value="Oklahoma">Oklahoma</option>
+				<option value="Oregon">Oregon</option>
+				<option value="Pennsylvania">Pennsylvania</option>
+				<option value="Rhode Island">Rhode Island</option>
+				<option value="South Carolina">South Carolina</option>
+				<option value="South Dakota">South Dakota</option>
+				<option value="Tennessee">Tennessee</option>
+				<option value="Texas">Texas</option>
+				<option value="Utah">Utah</option>
+				<option value="Vermont">Vermont</option>
+				<option value="Virginia">Virginia</option>
+				<option value="Washington">Washington</option>
+				<option value="West Virginia">West Virginia</option>
+				<option value="Wisconsin">Wisconsin</option>
+				<option value="Wyoming">Wyoming</option>
+			</datalist>
+			<label for="tax-percent">or percent?</label>
+			<input type="text" class="tax-percent" name="tax-percent" placeholder="Tax %"><label for="tax-amount">or enter tax total(split evenly):</label>
+			<input type="text" class="tax-amount" name="tax-amount" placeholder="$Tax total">
+		</div>
+		<div class="tip">
+			<fieldset>
+			  <legend>Tip Percent:</legend>
+			  <ul>
+			    <li>
+			      <label for="tip-20">20%</label>
+			      <input type="radio" checked id="tip-20" name="tip" value="20">
+			    </li>
+			    <li>
+			      <label for="tip-18">18%</label>
+			      <input type="radio" id="tip-18" name="tip" value="18">
+			    </li>
+			    <li>
+			      <label for="tip-15">15%</label>
+			      <input type="radio" id="tip-15" name="tip" value="tip-15">
+			    </li>
+			    <li>
+			    	<label for="tip-other">Other:</label>
+			    	<input type="radio" id="tip-other" name="tip">
+			    	<input type="text" id="tip-other-amount" name="tip-other-amount" placeholder="Enter percent...">
+			    </li>
+			  </ul>
+			</fieldset>
+			<input type="button" id="submit-forms" value="Submit!">
+		</div>
 	</form>
+</div>
 	<script src="build/app.bundle.js"></script>
 </body>
 </html>
