@@ -8,16 +8,14 @@ document.querySelector("#submit-forms").addEventListener("click",
 	testFunc);
 
 function testFunc(e){
-	const taxArr = calc.getTax();
-	console.log(taxArr);
+	const result = calc.calcAll();
+	const result2 = calc.getTotals();
 
 }
 
 
 
-
-
-console.log("Hello!");
-
 //When adding forms, make sure to make a new class for every form- increase a number for each form
+// Make sure fields are entered properly when submitting- make sure at least one tax and tip form arefilled out and use RE?
+
 
