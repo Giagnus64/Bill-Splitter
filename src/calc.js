@@ -8,7 +8,7 @@ class Calc {
 		this.tip18 = document.querySelector("#tip-18");
 		this.tip15 = document.querySelector("#tip-15");
 		this.tipOther = document.querySelector("#tip-other");
-		this.splitEvenlyAmount = document.querySelector("split-evenly");
+		this.splitEvenlyAmount = document.querySelector(".split-evenly-total");
 	}
 
 	calcPerson(person){
@@ -48,6 +48,7 @@ class Calc {
 		return {
 			name,
 			subtotal,
+			tipAmount,
 			total
 		};
 
@@ -55,15 +56,15 @@ class Calc {
 
 	calcAll(){
 		//iniiate array of arrays of each person and total
-		const totalArrs = [];
+		const totalsArr = [];
 		const personList = document.querySelectorAll(".person");
 		//create array from all person forms
 		const personArr = Array.from(personList);
 		//call individual person calc on each person
 		personArr.forEach(function(person){
-			totalArrs.push(calc.calcPerson(person));
+			totalsArr.push(calc.calcPerson(person));
 			});
-		return totalArrs;
+		return totalsArr;
 		}
 
 	getShared(){
@@ -175,6 +176,17 @@ class Calc {
 		const tip18Total = .18 * total;
 		const tip15Total = .15 * total;
 
+		//Get Grand Totals
+		const tip20GrandTotal = sub20 * personAmount;
+		const tip18GrandTotal = sub18 * personAmount;
+		const tip15GrandTotal = sub15 * personAmount;
+
+		//Get Tip Grand Totals
+		const tip20TipGrandTotal = tip20 * personAmount;
+		const tip18TipGrandTotal = tip18 * personAmount;
+		const tip15TipGrandTotal = tip15 * personAmount;
+
+
 		//returns an object with subtotals with tip added and tip totals
 		return {
 			sub20,
@@ -182,7 +194,13 @@ class Calc {
 			sub15,
 			tip20Total,
 			tip18Total,
-			tip15Total
+			tip15Total,
+			tip20GrandTotal,
+			tip18GrandTotal,
+			tip15GrandTotal,
+			tip20TipGrandTotal,
+			tip18TipGrandTotal,
+			tip15TipGrandTotal,
 		}
 
 	}
