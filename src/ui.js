@@ -18,16 +18,17 @@ class UI{
 		for(let i = 1; i <= formAmount;i++){
 			html += `<form class="person person${i}">
 				<div>
-					<label for="name">Name :</label>
-					<input type="text" class="name" name="name" placeholder="Name">
+					<label for="name">Name:</label>
+					<input type="text" class="name" name="name" placeholder="Person ${i}">
 				</div>
 				<div data-item-number="1">
 					<label for="item1">Item 1:</label>
-					<input type="number" class="item" name="item1">
+					<input type="number" class="item" name="item1" placeholder="$">
 				</div>
 				<div data-item-number="2">
 					<label for="item2">Item 2:</label>
-					<input type="number" class="item" name="item2">
+					<input type="number" class="item" name="item2"
+					placeholder="$">
 				</div>
 				<input type="button" class="add-item btn" value="Add Item">
 				</form>`
@@ -146,7 +147,7 @@ class UI{
 		newHTML += `
 			<div data-item-number="${itemCounter}">
 				<label for="item${itemCounter}">Item ${itemCounter}:</label>
-				<input type="number" class="item" name="item${itemCounter}">
+				<input type="number" class="item" placeholder="$" name="item${itemCounter}">
 			</div>
 			<input type="button" class="add-item btn" value="Add Item">`
 		//add new HTML to parent div
@@ -172,7 +173,6 @@ class UI{
 			//add new input and replace button within old html
 			newHTML += `<div class="shared-item" data-item-number="${itemCounter}">
 					<label for="shared${itemCounter}">Shared Item ${itemCounter}:</label>
-					<input type="text" class="shared-name" name="shared${itemCounter}">
 					<input type="number" class="shared-price" name="shared${itemCounter}">
 				</div><input type="button" class="btn add-shared" value="Add Shared Item">`
 			//add new HTML to parent div
@@ -180,6 +180,8 @@ class UI{
 		}
 	}
 }
+
+//** HTML has changed, update add shared item to reflect as such
 
 export const ui = new UI();
 

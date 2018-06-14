@@ -1,0 +1,39 @@
+.person-forms{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+	margin-bottom:5px;
+
+	& .person{
+		font-size:1.4rem;
+		text-align:center;
+		
+		margin:5px;
+		padding:5px;
+		flex-basis:100%;
+
+		@mixin atMedium{
+			flex-basis:45%;		
+		}
+
+		@mixin atLarge{
+			flex-basis:30%;
+		}
+	}
+
+	& input[type=text], input[type=number]{
+		width:100px;
+
+		@mixin atSmall{
+			width:125px;
+		}
+
+		@mixin atMedium{
+			width:150px;
+		}
+	} 
+
+	& .btn{
+		margin-top:5px;
+	}
+}

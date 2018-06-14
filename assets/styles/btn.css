@@ -1,0 +1,36 @@
+.btn{
+	padding:5px;
+	box-shadow:black 1px 1px 1px;
+	
+	&--large{
+		font-size:1.1rem;
+
+		@mixin atLarge{
+			font-size:1.4rem;
+		}
+	}
+
+	&__clicked{
+	box-shadow:none;
+	}
+}
+.btn:hover{
+	font-weight:600;
+	background-color:rgba(0,135,255,.7);
+	border:1px solid rgb(0,135,255);
+}
+
+#split-evenly{
+	padding:3px;
+	font-size:1.1rem;
+}
+
+#clear-fields{
+	display:block;
+	margin:auto;
+	margin-top:-5px;
+}
+
+#submit-forms{
+	font-size:1.5rem;
+}
