@@ -48,18 +48,19 @@ class UI{
 		totalsArr.forEach(function(personObj){
 			html += `<div class="person-box">
 			<h1 class="person-box__name">${personObj.name} owes...</h1>
-			<p class="person-box__subtotal">Subtotal: $${personObj.subtotal.toFixed(2)}</p>
-			<p class="person-box__tip-subtotal">Individual Tip: $${personObj.tipAmount.toFixed(2)}</p>
-			<p class="person-box__total-with-tip">Total with Tip: $${personObj.total.toFixed(2)}</p>
+			<p class="person-box__subtotal">Subtotal: <strong>$${personObj.subtotal.toFixed(2)}</strong></p>
+			<p class="person-box__tax-shared-total">Total with Tax and Shared Items: <strong>$${personObj.taxSharedTotal.toFixed(2)}</strong></p>
+			<p class="person-box__tip-subtotal">Individual Tip: <strong>$${personObj.tipAmount.toFixed(2)}</strong></p>
+			<p class="person-box__total-with-tip">Total with Tip: <strong>$${personObj.total.toFixed(2)}</strong></p>
 		</div>`
 		});
 		//add bottom div with grand totals information, and close off top div
 		html +=`</div>
 		<div class="grand-totals">
 		<h1 class="grand-totals__heading">Grand Totals</h1>
-		<p class="grand-totals__subtotal">Subtotal: $${grandObj.subtotal.toFixed(2)}</p>
-		<p class="grand-totals__tip-total">Tip total: $${grandObj.tipAmount.toFixed(2)}</p>
-		<p class="grand-totals__grand-total">Grand total: $${grandObj.grandTotal.toFixed(2)}</p>
+		<p class="grand-totals__subtotal">Subtotal: <strong>$${grandObj.subtotal.toFixed(2)}</strong></p>
+		<p class="grand-totals__tip-total">Tip total: <strong>$${grandObj.tipAmount.toFixed(2)}</strong></p>
+		<p class="grand-totals__grand-total">Grand total: <strong>$${grandObj.grandTotal.toFixed(2)}</strong></p>
 		</div>`;
 		//document.querySelector(".display-state")
 		this.displayState.innerHTML = html;
@@ -75,27 +76,27 @@ class UI{
 		<div class="person-box__se--container">
 		<div class="person-box__se">
 			<h1 class="person-box__se__heading">With 20% tip </h1>
-			<p class="person-box__se__tip-total">Amount in Tip: $${obj.sub20.toFixed(2)}</p>
-			<p class="person-box__se__subtotal">Amount with Tip: $${obj.tip20Total.toFixed(2)}</p>
+			<p class="person-box__se__tip-total">Amount in Tip: <strong>$${obj.tip20.toFixed(2)}</strong></p>
+			<p class="person-box__se__subtotal">Amount with Tip: <strong>$${obj.sub20.toFixed(2)}</strong></p>
 			<h1 class="person-box__se__subheading">As a Group...</h1>
-			<p class="person-box__se__tip-grand-total">You should leave $${obj.tip20TipGrandTotal.toFixed(2)} for a tip.</p>
-			<p class="person-box__se__grand-total">You should be paying $${obj.tip20GrandTotal.toFixed(2)}.</p>
+			<p class="person-box__se__tip-grand-total">You should leave <strong>$${obj.tip20Total.toFixed(2)}</strong> for a tip.</p>
+			<p class="person-box__se__grand-total">You should be paying <strong>$${obj.tip20GrandTotal.toFixed(2)}</strong>.</p>
 		</div>
 		<div class="person-box__se">
 			<h1 class="person-box__se__heading">With 18% tip </h1>
-			<p class="person-box__se__tip-total">Amount in Tip: $${obj.sub18.toFixed(2)}</p>
-			<p class="person-box__se__subtotal">Amount with Tip: $${obj.tip18Total.toFixed(2)}</p>
+			<p class="person-box__se__tip-total">Amount in Tip: <strong>$${obj.tip18.toFixed(2)}</strong></p>
+			<p class="person-box__se__subtotal">Amount with Tip: <strong>$${obj.sub18.toFixed(2)}</strong></p>
 			<h1 class="person-box__se__subheading">As a Group...</h1>
-			<p class="person-box__se__tip-grand-total">You should leave $${obj.tip18TipGrandTotal.toFixed(2)} for a tip.</p>
-			<p class="person-box__se__grand-total">You should be paying $${obj.tip18GrandTotal.toFixed(2)}.</p>
+			<p class="person-box__se__tip-grand-total">You should leave <strong>$${obj.tip18Total.toFixed(2)}</strong> for a tip.</p>
+			<p class="person-box__se__grand-total">You should be paying <strong>$${obj.tip18GrandTotal.toFixed(2)}</strong>.</p>
 		</div>
 		<div class="person-box__se">
 			<h1 class="person-box__se__heading">With 15% tip </h1>
-			<p class="person-box__se__tip-total">Amount in Tip: $${obj.sub15.toFixed(2)}</p>
-			<p class="person-box__se__subtotal">Amount with Tip: $${obj.tip15Total.toFixed(2)}</p>
+			<p class="person-box__se__tip-total">Amount in Tip: <strong>$${obj.tip15.toFixed(2)}</strong></p>
+			<p class="person-box__se__subtotal">Amount with Tip: <strong>$${obj.sub15.toFixed(2)}</strong></p>
 			<h1 class="person-box__se__subheading">As a Group...</h1>
-			<p class="person-box__se__tip-grand-total">You should leave $${obj.tip15TipGrandTotal.toFixed(2)} for a tip.</p>
-			<p class="person-box__se__grand-total">You should be paying $${obj.tip15GrandTotal.toFixed(2)}.</p>
+			<p class="person-box__se__tip-grand-total">You should leave <strong>$${obj.tip15Total.toFixed(2)}</strong> for a tip.</p>
+			<p class="person-box__se__grand-total">You should be paying <strong>$${obj.tip15GrandTotal.toFixed(2)}</strong>.</p>
 		</div></div>`;
 
 		this.splitEvenlyState.innerHTML = html;
@@ -163,22 +164,20 @@ class UI{
 		//check if addItem button is pressed using event delegation
 		if(e.target.classList.contains("add-shared")){
 			//save element with data attribute to pull itemCounter
-			prevItem = e.target.previousElementSibling;
+			prevItem = e.target.previousElementSibling.lastElementChild;
 			//pull innerHTMl to add extra field to
-			html = e.target.parentElement.innerHTML;
-			//remove button from html, to be replaced with button after new input is added
-			let newHTML = html.replace('<input type="button" class="btn add-shared" value="Add Shared Item">','');
+			html = e.target.previousElementSibling.innerHTML;
 			//set item counter using data attribute of saved event from above
 		    let itemCounter = parseInt(prevItem.dataset.itemNumber);
 			//increase item counter number
 			itemCounter++;
-			//add new input and replace button within old html
-			newHTML += `<div class="shared-item" data-item-number="${itemCounter}">
+			//add new input 
+			html += `<div class="shared-item" data-item-number="${itemCounter}">
 					<label for="shared${itemCounter}">Shared Item ${itemCounter}:</label>
 					<input type="number" class="shared-price" name="shared${itemCounter}">
-				</div><input type="button" class="btn add-shared" value="Add Shared Item">`
-			//add new HTML to parent div
-			e.target.parentElement.innerHTML = newHTML;
+				</div>`;
+			//replace html with new input
+			e.target.previousElementSibling.innerHTML = html;
 		}
 	}
 }
