@@ -26,6 +26,22 @@ document.querySelector(".shared-tax-tip").addEventListener("click",
 document.querySelector("#generate-forms").addEventListener('click',
 	generateForms);
 
+//listen for scroll on header
+window.onscroll = function(){stickyHeader()};
+
+var header = document.querySelector(".intro__header");
+
+var sticky = header.offsetHeight;
+console.log(sticky);
+
+function stickyHeader() {
+	if (window.pageYOffset >= sticky) {
+		header.classList.add("sticky-header");
+	} else{
+		header.classList.remove("sticky-header");
+	}
+}
+
 //REMEMBER TO VALIDATE EACH FUNCITON
 function addItem(e){
 	ui.addItem(e);

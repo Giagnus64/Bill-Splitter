@@ -9,30 +9,33 @@
 	<title>Bill Splitter</title>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="intro">
-			<div class="intro__header">
+	<div class="intro">
+		<div class="intro__header">
+			<div class="left">
 				<img class="intro__icon" src="assets/images/icons/wallet.png" alt="An icon of a wallet.">
 				<h1>Bill Splitter</h1>
 			</div>
-			<input type="button" id="clear-fields" class="btn btn--large"value="Restart Calculation">
+			<div class="right">
+				<input type="button" id="clear-fields" class="btn btn--large"value="Restart Calculation">
+			</div>
+		</div>
+		<div class="wrapper">
 			<p class="intro__text">Enter the amount of people splitting the bill in the form below. If you'd like to itemize the bill, click <strong>Generate Forms</strong>. A new form will pop up for each person you are splitting with. If they have more than 3 items, click the <em>"Add Item"</em> button until you have enough inputs for every item. Afterwards, enter your tax percentage tax section. If you do not know the tax percentage, simply enter the tax <strong>total</strong> in the corresponding input. The site will calculate the tax for you, and apply it accordingly. When all of your information is entered, hit the large submit button at the bottom of the page.<br><br>Alternatively, if you'd like to just split the bill evenly, click <input type="button" id="split-evenly" class="btn btn-large" value="I'm Lazy"> and enter your total with tax in the form that pops up. Your bill will be split and you will be shown tip information. Or you could just use the calculator on your phone. Why are you even here?</p>
-		</div>
 
-		<div class="intro__form-container">	
-			<div class="intro__form intro__form--person-amount">
-				<p>How many people are splitting the bill?</p>
-				<input type="number" class="person-amount" name="person-amount"placeholder="# of People">
-				<input type="button" id ="generate-forms" class="btn btn-large" value="Generate Forms" >
-			</div>
+			<div class="intro__form-container">	
+				<div class="intro__form intro__form--person-amount">
+					<p>How many people are splitting the bill?</p>
+					<input type="number" class="person-amount" name="person-amount"placeholder="# of People">
+					<input type="button" id ="generate-forms" class="btn btn-large" value="Generate Forms" >
+				</div>
 
-			<div class="intro__form intro__form--split-evenly-form">
-				<p>What is the total on the bill?</p>
-				<input type="number" class="split-evenly-total" name="easy-amount">
-				<input type="button" id="split-evenly-submit" class="btn btn-large submit-SE" value="Split Evenly">
+				<div class="intro__form intro__form--split-evenly-form">
+					<p>What is the total on the bill?</p>
+					<input type="number" class="split-evenly-total" name="easy-amount">
+					<input type="button" id="split-evenly-submit" class="btn btn-large submit-SE" value="Split Evenly">
+				</div>
 			</div>
 		</div>
-	</div>
 		
 <div class="input-state">
 	<div class="wrapper">

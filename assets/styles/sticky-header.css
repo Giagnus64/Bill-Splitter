@@ -1,0 +1,52 @@
+.sticky-header{
+	position:fixed;
+	display:flex;
+	justify-content:space-between;
+	top:0%;
+	background-color:mistyrose;
+	align-items:center;
+	height:auto;
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-backface-visibility: hidden;
+
+
+	& .left{
+		flex-basis:50%;
+		text-align:left;
+		font-size:.9rem;
+		margin-left:20px;
+
+		& img{
+			width:45px;
+			max-width:50px;
+			margin-top:-5px;
+
+			@mixin atMedium{
+				
+			}
+
+			@mixin atLarge{
+			}
+
+		}
+
+		& h1{
+			@mixin atMedium{
+				margin-bottom:-10px;
+			}
+		}
+	}
+
+	& #clear-fields{
+	display:inline-block;
+	margin-top:0;
+	margin-bottom:0;
+	flex-basis:50%;
+	margin-right:20px;
+	
+	}
+}
+
+.sticky-header + .intro-text{
+	position:relative;
+}
