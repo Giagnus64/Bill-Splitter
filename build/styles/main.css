@@ -360,6 +360,9 @@ input::placeholder{
 		text-align:center;
 
 	}
+.intro p{
+		line-height:1.25;
+	}
 .intro__form{
 		text-align:center;
 		width:80%;
@@ -380,11 +383,11 @@ input::placeholder{
 	}
 @media(min-width:900px){
 .intro__form{
-			flex-basis:50%;
 			font-size:1.3rem
 	}
 	}
 .intro__form--split-evenly-form{
+			display:none;
 		}
 .intro__form-container{
 		display:flex;
@@ -393,9 +396,6 @@ input::placeholder{
 		align-items:baseline;
 		margin-bottom:30px;
 	}
-.hide-on-submit{
-	
-}
 .btn{
 	padding:5px;
 	box-shadow:black 1px 1px 1px;
@@ -420,6 +420,7 @@ input::placeholder{
 #split-evenly{
 	padding:3px;
 	font-size:1.1rem;
+	
 }
 #clear-fields{
 	display:block;
@@ -493,7 +494,7 @@ input::placeholder{
 		}
 .shared-tax-tip .shared-item{
 		flex-basis:100%;
-		margin-bottom:5px;
+		margin-bottom:10px;
 		font-size:1.1rem;
 	}
 @media(min-width:700px){

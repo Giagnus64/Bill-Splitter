@@ -1,8 +1,6 @@
 import {ui} from "./ui";
 import {calc} from "./calc";
 
-
-
 //Event Listeners
 document.querySelector("#submit-forms").addEventListener("click",
 	submitForms);
@@ -13,12 +11,17 @@ document.querySelector("#split-evenly").addEventListener("click",
 //Listen for submit on split-evenly submit button
 document.querySelector(".intro__form-container").addEventListener("click", submitSE);
 
+//Listen for click on reset calculation
+document.querySelector("#clear-fields").addEventListener("click", resetForms);
+
 //listen for click on generated add items buttons- using event delegation
 document.querySelector(".input-state").addEventListener("click",
 	addItem);
+
 //listen for click on add-shared buttons, using event Delegation
 document.querySelector(".shared-tax-tip").addEventListener("click",
 	addShared);
+
 //listen for click on generate forms button
 document.querySelector("#generate-forms").addEventListener('click',
 	generateForms);
@@ -34,9 +37,24 @@ function addShared(e){
 	ui.addSharedItem(e);
 }
 
+function resetForms(){
+	//if input-state is currently hidden
+	if(document.querySelector(".input-state").style.display === 'none'){
+		ui.showInputState();
+	} else{
+		//gather all text and number inputs
+		const textInputs = document.querySelectorAll("input:not([type=button]):not([type=radio])");
+		//clear fields of all items
+		textInputs.forEach(function(input){
+		input.value = '';
+		});
+	}
+}
+
 function submitForms(e){
 	//VALIDATE FORMS
 	//CHANGE TO DISPLAY STATE
+	ui.hideInputState();
 	//get results from CalcAll and get Totals and pass them to Generate function in ui class
 	const totalsArr = calc.calcAll();
 	const grandObj = calc.getTotals();
@@ -44,19 +62,20 @@ function submitForms(e){
 }
 
 function displaySE(e){
-	//SHOW SE FORM
+	ui.showSEForm();
 }
 
 function submitSE(e){
 	if(e.target.classList.contains("submit-SE")){
 		//Validate Forms
-		//Change to Display SE State
+		//Hide Input State
+		ui.hideInputState();
 		const splitEvenlyObj = calc.splitEvenly();
 		ui.generateSEResults(splitEvenlyObj);
 		//Get results from calc SE and pass them to generate SE function
 	}
 }
-//When adding forms, make sure to make a new class for every form- increase a number for each form
+
 // Make sure fields are entered properly when submitting- make sure at least one tax and tip form arefilled out and use RE?
 
 
