@@ -1,5 +1,28 @@
 .footer{
-	& img{
-		width:10px;
+	text-align:center;
+	font-size:1.1rem;
+
+	@mixin atMedium{
+		font-size:1.3rem;
 	}
+
+	@mixin atLarge{
+		font-size:1.5rem;
+	}
+	&__row{
+		display:flex;
+		justify-content:space-around;
+		align-items:center;
+	}
+
+
+	& img{
+		width:30px;
+
+		@mixin atMedium{
+			width:40px;
+		}
+	}
+
+
 }

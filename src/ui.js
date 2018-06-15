@@ -71,8 +71,8 @@ class UI{
 		//pull results from calc via main app callback
 		let html = '';
 		//generate div with results
-		html = `<div class="person-box__se">
-		<h1 class="person-box__se__heading">Every Person Owes</h1>
+		html = `<h1 class="person-box__se__main-heading">Every Person Owes</h1>
+		<div class="person-box__se--container">
 		<div class="person-box__se">
 			<h1 class="person-box__se__heading">With 20% tip </h1>
 			<p class="person-box__se__tip-total">Amount in Tip: $${obj.sub20.toFixed(2)}</p>
@@ -96,7 +96,7 @@ class UI{
 			<h1 class="person-box__se__subheading">As a Group...</h1>
 			<p class="person-box__se__tip-grand-total">You should leave $${obj.tip15TipGrandTotal.toFixed(2)} for a tip.</p>
 			<p class="person-box__se__grand-total">You should be paying $${obj.tip15GrandTotal.toFixed(2)}.</p>
-		</div>`;
+		</div></div>`;
 
 		this.splitEvenlyState.innerHTML = html;
 
@@ -107,6 +107,8 @@ class UI{
 	showDisplayState(){
 		//hides basically all on the page
 		//shows results
+
+		//Hide the "hide-on-submit- class and re-configure the intro header and restart calculations button using the intro class as display flex"
 
 	}
 

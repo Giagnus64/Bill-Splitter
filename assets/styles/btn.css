@@ -1,6 +1,7 @@
 .btn{
 	padding:5px;
 	box-shadow:black 1px 1px 1px;
+	background-color:white;
 	
 	&--large{
 		font-size:1.1rem;

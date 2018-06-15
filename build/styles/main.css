@@ -393,9 +393,13 @@ input::placeholder{
 		align-items:baseline;
 		margin-bottom:30px;
 	}
+.hide-on-submit{
+	
+}
 .btn{
 	padding:5px;
 	box-shadow:black 1px 1px 1px;
+	background-color:white;
 }
 .btn--large{
 		font-size:1.1rem;
@@ -552,6 +556,88 @@ input::placeholder{
 		margin:5px;
 		margin-left:0;
 		}
-.footer img{
-		width:10px;
+.footer{
+	text-align:center;
+	font-size:1.1rem;
+
+
+}
+@media(min-width:700px){
+.footer{
+		font-size:1.3rem
+
+
+}
 	}
+@media(min-width:900px){
+.footer{
+		font-size:1.5rem
+
+
+}
+	}
+.footer__row{
+		display:flex;
+		justify-content:space-around;
+		align-items:center;
+	}
+.footer img{
+		width:30px;
+	}
+@media(min-width:700px){
+.footer img{
+			width:40px
+	}
+	}
+.display-state{
+	text-align:center;
+	font-size:1.2rem;
+
+}
+.display-state .container{
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:center;
+	}
+.display-state .person-box{
+		margin:30px;
+		padding:20px;
+		border:1px solid black;
+		flex-basis:100%;
+	}
+@media(min-width:700px){
+.display-state .person-box{
+			flex-basis:20%
+	}
+	}
+.display-state .person-box__tip-subtotal{
+			width:70%;
+			margin:0 auto;
+			border-bottom:1px dashed black;
+		}
+.display-state .grand-totals{
+		flex-basis:100%;
+	}
+.display-state .grand-totals__tip-total{
+			width:50%;
+			margin:0 auto;
+			border-bottom:1px dashed black;
+		}
+.split-evenly-state{
+	text-align:center;
+}
+.split-evenly-state .person-box__se{
+		border:1px solid black;
+		margin-left:5px;
+		margin-right:5px;
+		padding:10px;
+		margin-bottom:10px;
+	}
+.split-evenly-state .person-box__se--main-heading{
+			
+		}
+.split-evenly-state .person-box__se--container{
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:center;
+		}
