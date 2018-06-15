@@ -15,6 +15,7 @@ class Calc {
 		//initiate a total counter
 		let total = 0;
 		let subtotal;
+		let taxSharedTotal;
 		let name = person[0].value;
 		//add total of each item to total in array
 		for(let i = 1; i < person.length - 1; i++){
@@ -39,6 +40,10 @@ class Calc {
 		//set tax amount via percent
 		taxAmount = taxDecimal * total;
 
+
+		//set total with shared portion and tax
+		taxSharedTotal = total + taxAmount;
+
 		//**** Calc Tip ****
 		let tipDecimal = this.getTip();
 		let tipAmount = tipDecimal * total;
@@ -48,6 +53,7 @@ class Calc {
 		return {
 			name,
 			subtotal,
+			taxSharedTotal,
 			tipAmount,
 			total
 		};
@@ -181,14 +187,12 @@ class Calc {
 		const tip18GrandTotal = sub18 * personAmount;
 		const tip15GrandTotal = sub15 * personAmount;
 
-		//Get Tip Grand Totals
-		const tip20TipGrandTotal = tip20 * personAmount;
-		const tip18TipGrandTotal = tip18 * personAmount;
-		const tip15TipGrandTotal = tip15 * personAmount;
-
 
 		//returns an object with subtotals with tip added and tip totals
 		return {
+			tip20,
+			tip18,
+			tip15,
 			sub20,
 			sub18,
 			sub15,
@@ -198,9 +202,6 @@ class Calc {
 			tip20GrandTotal,
 			tip18GrandTotal,
 			tip15GrandTotal,
-			tip20TipGrandTotal,
-			tip18TipGrandTotal,
-			tip15TipGrandTotal,
 		}
 
 	}
