@@ -1,0 +1,23 @@
+.split-evenly-state{
+	text-align:center;
+
+
+
+	& .person-box__se{
+		border:1px solid black;
+		margin-left:5px;
+		margin-right:5px;
+		padding:10px;
+		margin-bottom:10px;
+		
+		&--main-heading{
+			
+		}
+
+		&--container{
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:center;
+		}
+	}
+}

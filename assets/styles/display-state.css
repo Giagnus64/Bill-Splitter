@@ -1,0 +1,39 @@
+.display-state{
+	text-align:center;
+	font-size:1.2rem;
+
+	& .container{
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:center;
+	}
+
+	& .person-box{
+		margin:30px;
+		padding:20px;
+		border:1px solid black;
+		flex-basis:100%;
+
+		@mixin atMedium{
+			flex-basis:20%;
+
+		}
+
+		&__tip-subtotal{
+			width:70%;
+			margin:0 auto;
+			border-bottom:1px dashed black;
+		}
+	}
+
+	& .grand-totals{
+		flex-basis:100%;
+
+		&__tip-total{
+			width:50%;
+			margin:0 auto;
+			border-bottom:1px dashed black;
+		}
+	}
+
+}

@@ -18,7 +18,8 @@ document.querySelector(".shared-tax-tip").addEventListener("click",
 	addShared);
 //listen for click on generate forms button
 document.querySelector("#generate-forms").addEventListener('click',
-	generateForms)
+	generateForms);
+
 //REMEMBER TO VALIDATE EACH FUNCITON
 function addItem(e){
 	ui.addItem(e);
