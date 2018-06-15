@@ -2,12 +2,14 @@ class UI{
 	constructor(){
 		this.introForm = document.querySelector(".intro-form");
 		this.personAmount = document.querySelector(".person-amount");
-		this.splitEvenlyForm = document.querySelector(".split-evenly-form");
+		this.splitEvenlyForm = document.querySelector(".intro__form--split-evenly-form");
 		this.splitEvenlyTotal = document.querySelector(".split-evenly-total");
 		this.personForms = document.querySelector(".person-forms");
 		this.inputState = document.querySelector(".input-state");
 		this.displayState = document.querySelector(".display-state");
 		this.splitEvenlyState = document.querySelector(".split-evenly-state");
+		this.formContainer = document.querySelector(".intro__form-container");
+		this.introText = document.querySelector(".intro__text");
 	}
 
 	generateForms(){
@@ -98,30 +100,37 @@ class UI{
 			<p class="person-box__se__tip-grand-total">You should leave <strong>$${obj.tip15Total.toFixed(2)}</strong> for a tip.</p>
 			<p class="person-box__se__grand-total">You should be paying <strong>$${obj.tip15GrandTotal.toFixed(2)}</strong>.</p>
 		</div></div>`;
-
+		//replace html
 		this.splitEvenlyState.innerHTML = html;
-
-
 
 	}
 
-	showDisplayState(){
-		//hides basically all on the page
-		//shows results
-
-		//Hide the "hide-on-submit- class and re-configure the intro header and restart calculations button using the intro class as display flex"
-
+	hideInputState(){
+		//hide intro paragraph
+		this.introText.style.display = 'none';
+		//hide form container
+		this.formContainer.style.display = 'none';
+		//hide intro state
+		this.inputState.style.display = 'none';
 	}
 
 	showInputState(){
-		//button that clears all forms and hides results
-		//unhides intro and tax-tip info
+		//show intro paragraph
+		this.introText.style.display = 'inline-block';
+		//show form container
+		this.formContainer.style.display = 'flex';
+		//show intro state
+		this.inputState.style.display = 'inline-block';
+		//change html of displaystate
+		this.displayState.innerHTML = '';
+		//change html of split-evenly state
+		this.splitEvenlyState.innerHTML = '';
 
 	}
 
 	showSEForm(){
-		//move intro state to the left
-		//add SE form
+		//show SE form
+		this.splitEvenlyForm.style.display = "inline-block";
 	}
 
 	showError(){
@@ -182,22 +191,4 @@ class UI{
 	}
 }
 
-//** HTML has changed, update add shared item to reflect as such
-
 export const ui = new UI();
-
-/* methods for ui---
-generate forms (with proper class names? however within calculations seperately numbered class names are not necessary)
-
-Different states- 
-Initial state when entering smount of people
-State when forms are generated
-state when forms are submitted
-state when split-evely is pressed
-state when split-evenly is submitted 
-
-
-maybe code a message that says you should leave a 20% tip?
-
-*/
-

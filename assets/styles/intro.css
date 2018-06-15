@@ -33,6 +33,10 @@
 
 	}
 
+	& p{
+		line-height:1.25;
+	}
+
 	&__form{
 		text-align:center;
 		width:80%;
@@ -52,12 +56,12 @@
 		}
 
 		@mixin atLarge{
-			flex-basis:50%;
 			font-size:1.3rem;
 		}
 
 
 		&--split-evenly-form{
+			display:none;
 		}
 	}
 
@@ -72,6 +76,3 @@
 
 }
 
-.hide-on-submit{
-	
-}
