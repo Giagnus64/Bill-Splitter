@@ -10,6 +10,10 @@ class UI{
 		this.splitEvenlyState = document.querySelector(".split-evenly-state");
 		this.formContainer = document.querySelector(".intro__form-container");
 		this.introText = document.querySelector(".intro__text");
+		this.taxPercent = document.querySelector(".tax-percent");
+		this.taxTotal = document.querySelector(".tax-amount");
+		this.tipOther = document.querySelector("#tip-other");
+		this.tipOtherAmount = document.querySelector(".tip-other-amount");
 	}
 
 	generateForms(){
@@ -133,11 +137,77 @@ class UI{
 		this.splitEvenlyForm.style.display = "inline-block";
 	}
 
-	showError(){
-		//pull in a message and class
-		//generate div and place it in html
-		//apply message and class
+	validateForms(e){
+		//validate first form
+		if(this.personAmount.value === ''){
+			this.showError('Please enter the amount of people splitting the bill.');
+			return 'error';
+		}
 
+		//if split evenly button is pressed
+		if(e.target.classList.contains("submit-SE")){
+			// if split evenly form is shown and has no value on submit
+			if (this.splitEvenlyForm.style.display !== 'none' && this.splitEvenlyTotal.value === ''){
+				this.showError('Please enter your bill total and click "Split Evenly".');
+				return false;
+			} else {
+				return true;
+			}
+		}
+		//validate person forms
+		//get list of person forms
+		const personList = document.querySelectorAll(".person");
+		//set counter for persons with all empty items
+		let emptyCounter = 0;
+		//iterate over persons
+		personList.forEach(function(person){
+			//get all items of each person
+			const itemList = person.querySelectorAll("input[type=number]");
+			//if ALl items are empty, add to empty counter
+			if(itemList[0].value === '' && itemList[1].value == ''){
+				emptyCounter++;
+			}
+		});
+		//if empty counter is above 0, show error
+		if(emptyCounter > 0){
+			ui.showError("Please insert at least 1 item for each person.");
+			return false;
+		}
+
+		//if both tax inputs are empty, show error
+		if (this.taxPercent.value === '' && this.taxTotal.value === ''){
+			ui.showError("Please enter a Tax Amount or a Tax Percent.");
+			return false;
+		}
+		//if tip-other is selected and tip other form is empty
+		if(this.tipOther.checked && this.tipOtherAmount.value === ''){
+			ui.showError("Please enter a tip percent.");
+			return false;
+		}
+		return true;
+	}
+
+	showError(message){
+		ui.hideError();
+		//generate div and place it in html
+		const div = document.createElement('div');
+		const text = document.createTextNode(message);
+		div.appendChild(text);
+		div.classList.add('error');
+		//insert error message in wrapper before form container
+		document.querySelector(".wrapper").insertBefore(div, this.formContainer);
+
+		//possibly fadeout after 3 secs?
+		//if not, hide error upon clicking another button
+
+	}
+
+	hideError(){
+		//if error exists, remove last error message
+		if(document.querySelector(".error")){
+			const error = document.querySelector(".error");
+			document.querySelector('.wrapper').removeChild(error);
+		}
 	}
 
 	addItem(e){

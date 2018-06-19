@@ -9,6 +9,7 @@
 			margin:0 auto;
 			border-bottom:3px dotted black;
 			margin-bottom:8px;
+			display:block;
 		}
 
 		&--container{

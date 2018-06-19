@@ -12,3 +12,9 @@ WORK ON STYLING NOW, INTEGRATE WITH DISPLAY STATES
 @import "footer.css";
 @import "display-state.css";
 @import "split-evenly-state.css";
+@import "sticky-header.css";
+@import "error.css";
+
+
+/* wrap tax box after certain width, consider same with forms
+color!*/
