@@ -277,7 +277,7 @@ html, body{
 
 	font-size:14px;
 
-	background-color:goldenrod;
+	background-color:rgba(22,132,76,.8);
 }
 @media(min-width:510px){
 html, body{
@@ -308,7 +308,7 @@ input[type=number], input[type=text]{
 	width:125px;
 	height:25px;
 	border-radius:5px;
-	background-color: #87b0f2;
+	background-color: #70A3C1;
 	border:1px solid #49484c;
 	color:black;
 	font-family:'Times New Roman';
@@ -483,6 +483,7 @@ input::placeholder{
 			margin:0 auto;
 			border-bottom:3px dotted black;
 			margin-bottom:8px;
+			display:block;
 		}
 .shared-tax-tip__shared-items--container{
 			width:100%;
@@ -686,3 +687,15 @@ input::placeholder{
 .sticky-header + .intro-text{
 	position:relative;
 }
+.error{
+	text-align:center;
+	background-color:#D46A6A;
+	color:white;
+	font-weight:600;
+	font-size:1.3rem;
+	padding:30px;
+	border:3px dashed black;
+
+}
+/* wrap tax box after certain width, consider same with forms
+color!*/

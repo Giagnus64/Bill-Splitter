@@ -26,21 +26,21 @@ document.querySelector(".shared-tax-tip").addEventListener("click",
 document.querySelector("#generate-forms").addEventListener('click',
 	generateForms);
 
-//listen for scroll on header
-window.onscroll = function(){stickyHeader()};
+// //listen for scroll on header
+// window.onscroll = function(){stickyHeader()};
 
-var header = document.querySelector(".intro__header");
+// var header = document.querySelector(".intro__header");
 
-var sticky = header.offsetHeight;
-console.log(sticky);
+// var sticky = header.offsetHeight;
+// console.log(sticky);
 
-function stickyHeader() {
-	if (window.pageYOffset >= sticky) {
-		header.classList.add("sticky-header");
-	} else{
-		header.classList.remove("sticky-header");
-	}
-}
+// function stickyHeader() {
+// 	if (window.pageYOffset >= sticky) {
+// 		header.classList.add("sticky-header");
+// 	} else{
+// 		header.classList.remove("sticky-header");
+// 	}
+// }
 
 //REMEMBER TO VALIDATE EACH FUNCITON
 function addItem(e){
@@ -69,12 +69,18 @@ function resetForms(){
 
 function submitForms(e){
 	//VALIDATE FORMS
-	//CHANGE TO DISPLAY STATE
-	ui.hideInputState();
-	//get results from CalcAll and get Totals and pass them to Generate function in ui class
-	const totalsArr = calc.calcAll();
-	const grandObj = calc.getTotals();
-	ui.generateResults(totalsArr, grandObj);
+	let permission = ui.validateForms(e);
+	if (permission !== true){
+		return 0;
+	} else{
+		ui.hideError();
+		//CHANGE TO DISPLAY STATE
+		ui.hideInputState();
+		//get results from CalcAll and get Totals and pass them to Generate function in ui class
+		const totalsArr = calc.calcAll();
+		const grandObj = calc.getTotals();
+		ui.generateResults(totalsArr, grandObj);
+	}
 }
 
 function displaySE(e){
@@ -82,13 +88,20 @@ function displaySE(e){
 }
 
 function submitSE(e){
+	//target split evenly button using event delegation
 	if(e.target.classList.contains("submit-SE")){
 		//Validate Forms
-		//Hide Input State
-		ui.hideInputState();
-		const splitEvenlyObj = calc.splitEvenly();
-		ui.generateSEResults(splitEvenlyObj);
-		//Get results from calc SE and pass them to generate SE function
+		let permission = ui.validateForms(e);
+		if (permission !== true){
+			return 0;
+		} else{
+			ui.hideError();
+			//Hide Input State
+			ui.hideInputState();
+			const splitEvenlyObj = calc.splitEvenly();
+			ui.generateSEResults(splitEvenlyObj);
+			//Get results from calc SE and pass them to generate SE function
+		}
 	}
 }
 
