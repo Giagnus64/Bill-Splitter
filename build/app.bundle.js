@@ -9054,15 +9054,39 @@ var _calc = __webpack_require__(330);
 
 //Event Listeners
 document.querySelector("#submit-forms").addEventListener("click", submitForms);
-//Listen for submit on split-evenly button
-document.querySelector("#split-evenly").addEventListener("click", submitSE);
+//Listen for submit on I'm lazy button
+document.querySelector("#split-evenly").addEventListener("click", displaySE);
+
+//Listen for submit on split-evenly submit button
+document.querySelector(".intro__form-container").addEventListener("click", submitSE);
+
+//Listen for click on reset calculation
+document.querySelector("#clear-fields").addEventListener("click", resetForms);
 
 //listen for click on generated add items buttons- using event delegation
 document.querySelector(".input-state").addEventListener("click", addItem);
+
 //listen for click on add-shared buttons, using event Delegation
 document.querySelector(".shared-tax-tip").addEventListener("click", addShared);
+
 //listen for click on generate forms button
 document.querySelector("#generate-forms").addEventListener('click', generateForms);
+
+// //listen for scroll on header
+// window.onscroll = function(){stickyHeader()};
+
+// var header = document.querySelector(".intro__header");
+
+// var sticky = header.offsetHeight;
+// console.log(sticky);
+
+// function stickyHeader() {
+// 	if (window.pageYOffset >= sticky) {
+// 		header.classList.add("sticky-header");
+// 	} else{
+// 		header.classList.remove("sticky-header");
+// 	}
+// }
 
 //REMEMBER TO VALIDATE EACH FUNCITON
 function addItem(e) {
@@ -9075,23 +9099,58 @@ function addShared(e) {
 	_ui.ui.addSharedItem(e);
 }
 
-function submitForms() {
-	//VALIDATE FORMS
-	//CHANGE TO DISPLAY STATE
-	//get results from CalcAll and get Totals and pass them to Generate function in ui class
-	var totalsArr = _calc.calc.calcAll();
-	var grandObj = _calc.calc.getTotals();
-	_ui.ui.generateResults(totalsArr, grandObj);
+function resetForms() {
+	//if input-state is currently hidden
+	if (document.querySelector(".input-state").style.display === 'none') {
+		_ui.ui.showInputState();
+	} else {
+		//gather all text and number inputs
+		var textInputs = document.querySelectorAll("input:not([type=button]):not([type=radio])");
+		//clear fields of all items
+		textInputs.forEach(function (input) {
+			input.value = '';
+		});
+	}
 }
 
-function submitSE() {
-	//Validate Forms
-	//Change to Display SE State
-	var splitEvenlyObj = _calc.calc.splitEvenly();
-	_ui.ui.generateSEResults(splitEvenlyObj);
-	//Get results from calc SE and pass them to generate SE function
+function submitForms(e) {
+	//VALIDATE FORMS
+	var permission = _ui.ui.validateForms(e);
+	if (permission !== true) {
+		return 0;
+	} else {
+		_ui.ui.hideError();
+		//CHANGE TO DISPLAY STATE
+		_ui.ui.hideInputState();
+		//get results from CalcAll and get Totals and pass them to Generate function in ui class
+		var totalsArr = _calc.calc.calcAll();
+		var grandObj = _calc.calc.getTotals();
+		_ui.ui.generateResults(totalsArr, grandObj);
+	}
 }
-//When adding forms, make sure to make a new class for every form- increase a number for each form
+
+function displaySE(e) {
+	_ui.ui.showSEForm();
+}
+
+function submitSE(e) {
+	//target split evenly button using event delegation
+	if (e.target.classList.contains("submit-SE")) {
+		//Validate Forms
+		var permission = _ui.ui.validateForms(e);
+		if (permission !== true) {
+			return 0;
+		} else {
+			_ui.ui.hideError();
+			//Hide Input State
+			_ui.ui.hideInputState();
+			var splitEvenlyObj = _calc.calc.splitEvenly();
+			_ui.ui.generateSEResults(splitEvenlyObj);
+			//Get results from calc SE and pass them to generate SE function
+		}
+	}
+}
+
 // Make sure fields are entered properly when submitting- make sure at least one tax and tip form arefilled out and use RE?
 
 /***/ }),
@@ -9115,12 +9174,18 @@ var UI = function () {
 
 		this.introForm = document.querySelector(".intro-form");
 		this.personAmount = document.querySelector(".person-amount");
-		this.splitEvenlyForm = document.querySelector(".split-evenly-form");
+		this.splitEvenlyForm = document.querySelector(".intro__form--split-evenly-form");
 		this.splitEvenlyTotal = document.querySelector(".split-evenly-total");
 		this.personForms = document.querySelector(".person-forms");
 		this.inputState = document.querySelector(".input-state");
 		this.displayState = document.querySelector(".display-state");
 		this.splitEvenlyState = document.querySelector(".split-evenly-state");
+		this.formContainer = document.querySelector(".intro__form-container");
+		this.introText = document.querySelector(".intro__text");
+		this.taxPercent = document.querySelector(".tax-percent");
+		this.taxTotal = document.querySelector(".tax-amount");
+		this.tipOther = document.querySelector("#tip-other");
+		this.tipOtherAmount = document.querySelector(".tip-other-amount");
 	}
 
 	_createClass(UI, [{
@@ -9131,7 +9196,7 @@ var UI = function () {
 			var html = '';
 			//create html with forms needed
 			for (var i = 1; i <= formAmount; i++) {
-				html += "<form class=\"person person" + i + "\">\n\t\t\t\t<div>\n\t\t\t\t\t<label for=\"name\">Name:</label>\n\t\t\t\t\t<input type=\"text\" class=\"name\" name=\"name\" placeholder=\"Person " + i + "\">\n\t\t\t\t</div>\n\t\t\t\t<div data-item-number=\"1\">\n\t\t\t\t\t<label for=\"item1\">Item 1:</label>\n\t\t\t\t\t<input type=\"number\" class=\"item\" name=\"item1\" placeholder=\"$\">\n\t\t\t\t</div>\n\t\t\t\t<div data-item-number=\"2\">\n\t\t\t\t\t<label for=\"item2\">Item 2:</label>\n\t\t\t\t\t<input type=\"number\" class=\"item\" name=\"item2\"\n\t\t\t\t\tplaceholder=\"$\">\n\t\t\t\t</div>\n\t\t\t\t<input type=\"button\" class=\"add-item btn\" value=\"Add Item\">\n\t\t\t\t</form>";
+				html += "<form class=\"person person" + i + "\"><div class=\"person__border\">\n\t\t\t\t<div>\n\t\t\t\t\t<label for=\"name\">Name:</label>\n\t\t\t\t\t<input type=\"text\" class=\"name\" name=\"name\" placeholder=\"Person " + i + "\">\n\t\t\t\t</div>\n\t\t\t\t<div data-item-number=\"1\">\n\t\t\t\t\t<label for=\"item1\">Item 1:</label>\n\t\t\t\t\t<input type=\"number\" class=\"item\" name=\"item1\" placeholder=\"$\">\n\t\t\t\t</div>\n\t\t\t\t<div data-item-number=\"2\">\n\t\t\t\t\t<label for=\"item2\">Item 2:</label>\n\t\t\t\t\t<input type=\"number\" class=\"item\" name=\"item2\"\n\t\t\t\t\tplaceholder=\"$\">\n\t\t\t\t</div>\n\t\t\t\t<input type=\"button\" class=\"add-item btn\" value=\"Add Item\">\n\t\t\t\t</div>\n\t\t\t\t</form>";
 			}
 			//shrink intro form*
 			//insert forms
@@ -9146,10 +9211,10 @@ var UI = function () {
 			html += '<div class="container">';
 			//generate divs with results
 			totalsArr.forEach(function (personObj) {
-				html += "<div class=\"person-box\">\n\t\t\t<h1 class=\"person-box__name\">" + personObj.name + " owes...</h1>\n\t\t\t<p class=\"person-box__subtotal\">Subtotal: $" + personObj.subtotal.toFixed(2) + "</p>\n\t\t\t<p class=\"person-box__tip-subtotal\">Individual Tip: $" + personObj.tipAmount.toFixed(2) + "</p>\n\t\t\t<p class=\"person-box__total-with-tip\">Total with Tip: $" + personObj.total.toFixed(2) + "</p>\n\t\t</div>";
+				html += "<div class=\"person-box\">\n\t\t\t<h1 class=\"person-box__name\">" + personObj.name + " owes...</h1>\n\t\t\t<p class=\"person-box__subtotal\">Subtotal: <strong>$" + personObj.subtotal.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__tax-shared-total\">Total with Tax and Shared Items: <strong>$" + personObj.taxSharedTotal.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__tip-subtotal\">Individual Tip: <strong>$" + personObj.tipAmount.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__total-with-tip\">Total with Tip: <strong>$" + personObj.total.toFixed(2) + "</strong></p>\n\t\t</div>";
 			});
 			//add bottom div with grand totals information, and close off top div
-			html += "</div>\n\t\t<div class=\"grand-totals\">\n\t\t<h1 class=\"grand-totals__heading\">Grand Totals</h1>\n\t\t<p class=\"grand-totals__subtotal\">Subtotal: $" + grandObj.subtotal.toFixed(2) + "</p>\n\t\t<p class=\"grand-totals__tip-total\">Tip total: $" + grandObj.tipAmount.toFixed(2) + "</p>\n\t\t<p class=\"grand-totals__grand-total\">Grand total: $" + grandObj.grandTotal.toFixed(2) + "</p>\n\t\t</div>";
+			html += "</div>\n\t\t<div class=\"grand-totals\">\n\t\t<h1 class=\"grand-totals__heading\">Grand Totals</h1>\n\t\t<p class=\"grand-totals__subtotal\">Subtotal: <strong>$" + grandObj.subtotal.toFixed(2) + "</strong></p>\n\t\t<p class=\"grand-totals__tip-total\">Tip total: <strong>$" + grandObj.tipAmount.toFixed(2) + "</strong></p>\n\t\t<p class=\"grand-totals__grand-total\">Grand total: <strong>$" + grandObj.grandTotal.toFixed(2) + "</strong></p>\n\t\t</div>";
 			//document.querySelector(".display-state")
 			this.displayState.innerHTML = html;
 		}
@@ -9160,39 +9225,114 @@ var UI = function () {
 			//pull results from calc via main app callback
 			var html = '';
 			//generate div with results
-			html = "<h1 class=\"person-box__se__main-heading\">Every Person Owes</h1>\n\t\t<div class=\"person-box__se--container\">\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 20% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: $" + obj.sub20.toFixed(2) + "</p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: $" + obj.tip20Total.toFixed(2) + "</p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave $" + obj.tip20TipGrandTotal.toFixed(2) + " for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying $" + obj.tip20GrandTotal.toFixed(2) + ".</p>\n\t\t</div>\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 18% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: $" + obj.sub18.toFixed(2) + "</p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: $" + obj.tip18Total.toFixed(2) + "</p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave $" + obj.tip18TipGrandTotal.toFixed(2) + " for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying $" + obj.tip18GrandTotal.toFixed(2) + ".</p>\n\t\t</div>\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 15% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: $" + obj.sub15.toFixed(2) + "</p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: $" + obj.tip15Total.toFixed(2) + "</p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave $" + obj.tip15TipGrandTotal.toFixed(2) + " for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying $" + obj.tip15GrandTotal.toFixed(2) + ".</p>\n\t\t</div></div>";
-
+			html = "<h1 class=\"person-box__se__main-heading\">Every Person Owes</h1>\n\t\t<div class=\"person-box__se--container\">\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 20% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: <strong>$" + obj.tip20.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: <strong>$" + obj.sub20.toFixed(2) + "</strong></p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave <strong>$" + obj.tip20Total.toFixed(2) + "</strong> for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying <strong>$" + obj.tip20GrandTotal.toFixed(2) + "</strong>.</p>\n\t\t</div>\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 18% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: <strong>$" + obj.tip18.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: <strong>$" + obj.sub18.toFixed(2) + "</strong></p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave <strong>$" + obj.tip18Total.toFixed(2) + "</strong> for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying <strong>$" + obj.tip18GrandTotal.toFixed(2) + "</strong>.</p>\n\t\t</div>\n\t\t<div class=\"person-box__se\">\n\t\t\t<h1 class=\"person-box__se__heading\">With 15% tip </h1>\n\t\t\t<p class=\"person-box__se__tip-total\">Amount in Tip: <strong>$" + obj.tip15.toFixed(2) + "</strong></p>\n\t\t\t<p class=\"person-box__se__subtotal\">Amount with Tip: <strong>$" + obj.sub15.toFixed(2) + "</strong></p>\n\t\t\t<h1 class=\"person-box__se__subheading\">As a Group...</h1>\n\t\t\t<p class=\"person-box__se__tip-grand-total\">You should leave <strong>$" + obj.tip15Total.toFixed(2) + "</strong> for a tip.</p>\n\t\t\t<p class=\"person-box__se__grand-total\">You should be paying <strong>$" + obj.tip15GrandTotal.toFixed(2) + "</strong>.</p>\n\t\t</div></div>";
+			//replace html
 			this.splitEvenlyState.innerHTML = html;
 		}
 	}, {
-		key: "showDisplayState",
-		value: function showDisplayState() {
-			//hides basically all on the page
-			//shows results
-
-			//Hide the "hide-on-submit- class and re-configure the intro header and restart calculations button using the intro class as display flex"
-
+		key: "hideInputState",
+		value: function hideInputState() {
+			//hide intro paragraph
+			this.introText.style.display = 'none';
+			//hide form container
+			this.formContainer.style.display = 'none';
+			//hide intro state
+			this.inputState.style.display = 'none';
 		}
 	}, {
 		key: "showInputState",
 		value: function showInputState() {
-			//button that clears all forms and hides results
-			//unhides intro and tax-tip info
-
+			//show intro paragraph
+			this.introText.style.display = 'block';
+			//show form container
+			this.formContainer.style.display = 'flex';
+			//show intro state
+			this.inputState.style.display = 'block';
+			//change html of displaystate
+			this.displayState.innerHTML = '';
+			//change html of split-evenly state
+			this.splitEvenlyState.innerHTML = '';
 		}
 	}, {
 		key: "showSEForm",
 		value: function showSEForm() {
-			//move intro state to the left
-			//add SE form
+			//show SE form
+			this.splitEvenlyForm.style.display = "inline-block";
+		}
+	}, {
+		key: "validateForms",
+		value: function validateForms(e) {
+			//validate first form
+			if (this.personAmount.value === '') {
+				this.showError('Please enter the amount of people splitting the bill.');
+				return 'error';
+			}
+
+			//if split evenly button is pressed
+			if (e.target.classList.contains("submit-SE")) {
+				// if split evenly form is shown and has no value on submit
+				if (this.splitEvenlyForm.style.display !== 'none' && this.splitEvenlyTotal.value === '') {
+					this.showError('Please enter your bill total and click "Split Evenly".');
+					return false;
+				} else {
+					return true;
+				}
+			}
+			//validate person forms
+			//get list of person forms
+			var personList = document.querySelectorAll(".person");
+			//set counter for persons with all empty items
+			var emptyCounter = 0;
+			//iterate over persons
+			personList.forEach(function (person) {
+				//get all items of each person
+				var itemList = person.querySelectorAll("input[type=number]");
+				//if ALl items are empty, add to empty counter
+				if (itemList[0].value === '' && itemList[1].value == '') {
+					emptyCounter++;
+				}
+			});
+			//if empty counter is above 0, show error
+			if (emptyCounter > 0) {
+				ui.showError("Please insert at least 1 item for each person.");
+				return false;
+			}
+
+			//if both tax inputs are empty, show error
+			if (this.taxPercent.value === '' && this.taxTotal.value === '') {
+				ui.showError("Please enter a Tax Amount or a Tax Percent.");
+				return false;
+			}
+			//if tip-other is selected and tip other form is empty
+			if (this.tipOther.checked && this.tipOtherAmount.value === '') {
+				ui.showError("Please enter a tip percent.");
+				return false;
+			}
+			return true;
 		}
 	}, {
 		key: "showError",
-		value: function showError() {
-			//pull in a message and class
+		value: function showError(message) {
+			ui.hideError();
 			//generate div and place it in html
-			//apply message and class
+			var div = document.createElement('div');
+			var text = document.createTextNode(message);
+			div.appendChild(text);
+			div.classList.add('error');
+			//insert error message in wrapper before form container
+			document.querySelector(".wrapper").insertBefore(div, this.formContainer);
 
+			//possibly fadeout after 3 secs?
+			//if not, hide error upon clicking another button
+		}
+	}, {
+		key: "hideError",
+		value: function hideError() {
+			//if error exists, remove last error message
+			if (document.querySelector(".error")) {
+				var error = document.querySelector(".error");
+				document.querySelector('.wrapper').removeChild(error);
+			}
 		}
 	}, {
 		key: "addItem",
@@ -9225,19 +9365,17 @@ var UI = function () {
 			//check if addItem button is pressed using event delegation
 			if (e.target.classList.contains("add-shared")) {
 				//save element with data attribute to pull itemCounter
-				prevItem = e.target.previousElementSibling;
+				prevItem = e.target.previousElementSibling.lastElementChild;
 				//pull innerHTMl to add extra field to
-				html = e.target.parentElement.innerHTML;
-				//remove button from html, to be replaced with button after new input is added
-				var newHTML = html.replace('<input type="button" class="btn add-shared" value="Add Shared Item">', '');
+				html = e.target.previousElementSibling.innerHTML;
 				//set item counter using data attribute of saved event from above
 				var itemCounter = parseInt(prevItem.dataset.itemNumber);
 				//increase item counter number
 				itemCounter++;
-				//add new input and replace button within old html
-				newHTML += "<div class=\"shared-item\" data-item-number=\"" + itemCounter + "\">\n\t\t\t\t\t<label for=\"shared" + itemCounter + "\">Shared Item " + itemCounter + ":</label>\n\t\t\t\t\t<input type=\"number\" class=\"shared-price\" name=\"shared" + itemCounter + "\">\n\t\t\t\t</div><input type=\"button\" class=\"btn add-shared\" value=\"Add Shared Item\">";
-				//add new HTML to parent div
-				e.target.parentElement.innerHTML = newHTML;
+				//add new input 
+				html += "<div class=\"shared-item\" data-item-number=\"" + itemCounter + "\">\n\t\t\t\t\t<label for=\"shared" + itemCounter + "\">Shared Item " + itemCounter + ":</label>\n\t\t\t\t\t<input type=\"number\" class=\"shared-price\" name=\"shared" + itemCounter + "\">\n\t\t\t\t</div>";
+				//replace html with new input
+				e.target.previousElementSibling.innerHTML = html;
 			}
 		}
 	}]);
@@ -9245,24 +9383,7 @@ var UI = function () {
 	return UI;
 }();
 
-//** HTML has changed, update add shared item to reflect as such
-
 var ui = exports.ui = new UI();
-
-/* methods for ui---
-generate forms (with proper class names? however within calculations seperately numbered class names are not necessary)
-
-Different states- 
-Initial state when entering smount of people
-State when forms are generated
-state when forms are submitted
-state when split-evely is pressed
-state when split-evenly is submitted 
-
-
-maybe code a message that says you should leave a 20% tip?
-
-*/
 
 /***/ }),
 /* 330 */
@@ -9300,6 +9421,7 @@ var Calc = function () {
 			//initiate a total counter
 			var total = 0;
 			var subtotal = void 0;
+			var taxSharedTotal = void 0;
 			var name = person[0].value;
 			//add total of each item to total in array
 			for (var i = 1; i < person.length - 1; i++) {
@@ -9324,6 +9446,9 @@ var Calc = function () {
 			//set tax amount via percent
 			taxAmount = taxDecimal * total;
 
+			//set total with shared portion and tax
+			taxSharedTotal = total + taxAmount;
+
 			//**** Calc Tip ****
 			var tipDecimal = this.getTip();
 			var tipAmount = tipDecimal * total;
@@ -9333,6 +9458,7 @@ var Calc = function () {
 			return {
 				name: name,
 				subtotal: subtotal,
+				taxSharedTotal: taxSharedTotal,
 				tipAmount: tipAmount,
 				total: total
 			};
@@ -9470,13 +9596,11 @@ var Calc = function () {
 			var tip18GrandTotal = sub18 * personAmount;
 			var tip15GrandTotal = sub15 * personAmount;
 
-			//Get Tip Grand Totals
-			var tip20TipGrandTotal = tip20 * personAmount;
-			var tip18TipGrandTotal = tip18 * personAmount;
-			var tip15TipGrandTotal = tip15 * personAmount;
-
 			//returns an object with subtotals with tip added and tip totals
 			return {
+				tip20: tip20,
+				tip18: tip18,
+				tip15: tip15,
 				sub20: sub20,
 				sub18: sub18,
 				sub15: sub15,
@@ -9485,10 +9609,7 @@ var Calc = function () {
 				tip15Total: tip15Total,
 				tip20GrandTotal: tip20GrandTotal,
 				tip18GrandTotal: tip18GrandTotal,
-				tip15GrandTotal: tip15GrandTotal,
-				tip20TipGrandTotal: tip20TipGrandTotal,
-				tip18TipGrandTotal: tip18TipGrandTotal,
-				tip15TipGrandTotal: tip15TipGrandTotal
+				tip15GrandTotal: tip15GrandTotal
 			};
 		}
 	}]);

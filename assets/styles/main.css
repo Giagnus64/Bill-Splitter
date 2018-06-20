@@ -4,6 +4,7 @@ WORK ON STYLING NOW, INTEGRATE WITH DISPLAY STATES
 */
 @import "normalize.css";
 @import "mixins.css";
+@import "variables.css";
 @import "base.css";
 @import "intro.css";
 @import "btn.css";

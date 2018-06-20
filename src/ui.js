@@ -22,7 +22,7 @@ class UI{
 		let html ='';
 		//create html with forms needed
 		for(let i = 1; i <= formAmount;i++){
-			html += `<form class="person person${i}">
+			html += `<form class="person person${i}"><div class="person__border">
 				<div>
 					<label for="name">Name:</label>
 					<input type="text" class="name" name="name" placeholder="Person ${i}">
@@ -37,6 +37,7 @@ class UI{
 					placeholder="$">
 				</div>
 				<input type="button" class="add-item btn" value="Add Item">
+				</div>
 				</form>`
 		}
 		//shrink intro form*
@@ -120,11 +121,11 @@ class UI{
 
 	showInputState(){
 		//show intro paragraph
-		this.introText.style.display = 'inline-block';
+		this.introText.style.display = 'block';
 		//show form container
 		this.formContainer.style.display = 'flex';
 		//show intro state
-		this.inputState.style.display = 'inline-block';
+		this.inputState.style.display = 'block';
 		//change html of displaystate
 		this.displayState.innerHTML = '';
 		//change html of split-evenly state
