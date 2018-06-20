@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content ="width=device-width, initial-scale=1.0">
+	<meta http-equip="X-UA-Compatible" content ="ie=edge">
+	<link rel="stylesheet" href="styles/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700" rel="stylesheet">
+	<title>Bill Splitter</title>
+</head>
+<body>
+	<div class="intro">
+		<div class="intro__header">
+			<div class="left">
+				<img class="intro__icon" src="assets/icons/wallet.png" alt="An icon of a wallet.">
+				<h1>Bill Splitter</h1>
+			</div>
+			<div class="right">
+				<input type="button" id="clear-fields" class="btn btn--large"value="Restart Calculation">
+			</div>
+		</div>
+		<div class="wrapper">
+			<p class="intro__text">Enter the amount of people splitting the bill in the form below. Click <em>Generate Forms</em> and a new form will pop up for each person you are splitting with. If they have more than 3 items, click <em>"Add Item"</em>. Afterwards, enter your tax percentage. If you do not know the tax percentage, enter the tax <strong>total</strong> in the corresponding form. The app will calculate and apply the tax for you. When all of your information is entered, hit the large submit button at the bottom of the page.<br><br>If you'd like to just split the bill evenly, click <input type="button" id="split-evenly" class="btn btn-large" value="I'm Lazy"> and enter your total with tax in the form that pops up. Or you could just use the calculator on your phone. Why are you even here?</p>
+
+			<div class="intro__form-container">	
+				<div class="intro__form intro__form--person-amount">
+					<p>How many people are splitting the bill?</p>
+					<input type="number" class="person-amount" name="person-amount"placeholder="# of People">
+					<input type="button" id ="generate-forms" class="btn btn-large" value="Generate Forms" >
+				</div>
+
+				<div class="intro__form intro__form--split-evenly-form">
+					<p>What is the total on the bill?</p>
+					<input type="number" class="split-evenly-total" name="easy-amount">
+					<input type="button" id="split-evenly-submit" class="btn btn-large submit-SE" value="Split Evenly">
+				</div>
+			</div>
+		</div>
+	</div>
+		
+<div class="input-state">
+	<div class="wrapper">
+		<div class="person-forms">
+			<!-- <form class="person person1">
+				<div>
+					<label for="name">Name :</label>
+					<input type="text" class="name" name="name" placeholder="Name">
+				</div>
+				<div data-item-number="1">
+					<label for="item1">Item 1:</label>
+					<input type="number" class="item" name="item1">
+				</div>
+				<div data-item-number="2">
+					<label for="item2">Item 2:</label>
+					<input type="number" class="item" name="item2">
+				</div>
+				<div data-item-number="3">
+					<label for="item3">Item 3:</label>
+					<input type="number" class="item" name="item3">
+				</div>
+				<input type="button" class="add-item btn" value="Add Item">
+			</form>
+		<form class="person person2">
+			<div data-item-number="1">
+				<label for="name">Name:</label>
+				<input type="text" class="name" name="name" placeholder="Name">
+			</div>
+			<div data-item-number="2">
+				<label for="item1">Item 1:</label>
+				<input type="text" class="item" name="item1">
+			</div>
+			<div>
+				<label for="item2">Item 2:</label>
+				<input type="text" class="item" name="item2">
+			</div>
+			<div data-item-number="3">
+				<label for="item3">Item 3:</label>
+				<input type="text" class="item" name="item3">
+			</div>
+			<input type="button" class="add-item btn" value="Add Item">
+		</form> -->
+		</div> 
+	</div>
+	<div class="wrapper">
+		<div class="shared-tax-tip">
+			<form action="" class="">
+				<div class="shared-tax-tip__shared-items">
+					<h1 class="shared-tax-tip__shared-items--title box-title">Shared Items</h1>
+					<div class="shared-tax-tip__shared-items--container">
+						<div class="shared-item" data-item-number="1">
+							<label for="shared1">Shared Item 1:</label>
+							<input type="number" class="shared-price" name="shared1">
+						</div>
+						<div class="shared-item" data-item-number="2">
+							<label for="shared2">Shared Item 2:</label>
+							<input type="number" class="shared-price" name="shared2">
+						</div>
+					</div>
+					<input type="button" class="btn add-shared" value="Add Shared Item">
+				</div>
+				<div class="shared-tax-tip__tax-box">
+					<h2 class="shared-tax-tip__tax-box--title box-title">Tax</h2>
+					<div class="shared-tax-tip__tax-box--container">
+						<div class="tax-input">
+							<label for="tax-percent">Tax percent:</label>
+							<input type="number" class="tax-percent" name="tax-percent" placeholder="Tax %">
+						</div>
+						<div class="tax-input">
+							<label for="tax-amount"> or Tax total:</label>
+							<input type="number" class="tax-amount" name="tax-amount" placeholder="$Tax total">
+						</div>
+					</div>
+				</div>
+				<div class="shared-tax-tip__tip">
+					<h2 class="shared-tax-tip__tip--title">Tip</h2>
+					<fieldset>
+					  <legend></legend>
+					  <ul>
+					    <li>
+					      <label for="tip-20">20%</label>
+					      <input type="radio" checked id="tip-20" name="tip" value="20">
+					    </li>
+					    <li>
+					      <label for="tip-18">18%</label>
+					      <input type="radio" id="tip-18" name="tip" value="18">
+					    </li>
+					    <li>
+					      <label for="tip-15">15%</label>
+					      <input type="radio" id="tip-15" name="tip" value="tip-15">
+					    </li>
+					    <li>
+					    	<label for="tip-other">Other:</label>
+					    	<input type="radio" id="tip-other" name="tip">
+					    	<input type="number" class="tip-other-amount" name="tip-other-amount" placeholder="Enter percent...">
+					    </li>
+					  </ul>
+					</fieldset>
+					<input type="button" id="submit-forms" class="btn" value="Submit!">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="display-state"></div>
+
+<div class="split-evenly-state"></div>
+<div class="footer">
+		<p>NOTE: This website does <strong>NOT</strong> save any names, amounts, or any data entered. </p>
+		<div class="footer__row">
+			<span class="footer__copy">Made by Gianfranco Nuschese  &copy;</span>
+			<span class="footer__links">
+			<a href="https://github.com/Giagnus64" target="_blank" class="github"><img src="assets/icons/github.png" alt=""></a>
+			<a href="mailto:giagnus64@gmail.com" target="_blank" class="email"><img src="assets/icons/envelope.png" alt=""></a>
+			<a href="" class="website">
+				<img src="assets/icons/information.png" alt="">
+			</a>
+			</span> 
+		</div>
+	<script src="app.bundle.js"></script>
+</body>
+</html>
+
