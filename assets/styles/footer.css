@@ -1,6 +1,7 @@
 .footer{
 	text-align:center;
 	font-size:1.1rem;
+	
 
 	@mixin atMedium{
 		font-size:1.3rem;

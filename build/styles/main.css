@@ -274,7 +274,7 @@ template {
 html, body{
 	font-family: 'Raleway', 'sans-serif';
 	box-sizing:border-box; 
-
+	color:#06070B;
 	font-size:14px;
 
 	background-color:rgba(22,132,76,.8);
@@ -440,7 +440,6 @@ input::placeholder{
 .person-forms .person{
 		font-size:1.4rem;
 		text-align:center;
-		
 		margin:5px;
 		padding:5px;
 		flex-basis:100%;
@@ -454,6 +453,20 @@ input::placeholder{
 .person-forms .person{
 			flex-basis:30%
 	}
+	}
+.person-forms .person__border{
+			border:3px solid #06070B;
+			width:60%;
+			margin:5px auto;
+			padding-top:10px;
+			padding-bottom:10px;
+			background-color:#C2C8CB;
+			background-color:rgba(255,231,223, .7);
+		}
+@media(min-width:700px){
+.person-forms .person__border{
+				padding:10px
+		}
 	}
 .person-forms input[type=text], .person-forms input[type=number]{
 		width:100px;
@@ -472,16 +485,25 @@ input::placeholder{
 		margin-top:5px;
 	}
 .shared-tax-tip{
-	border:3px solid black;
+	border:3px solid #06070B;
 
 
 
 }
+@media(min-width:900px){
+.shared-tax-tip{
+		margin-left:10%;
+		margin-right:10%
+
+
+
+}
+	}
 .shared-tax-tip__shared-items--title{
 			width:50%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted #06070B;
 			margin-bottom:8px;
 			display:block;
 		}
@@ -523,7 +545,7 @@ input::placeholder{
 			width:25%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted #06070B;
 			margin-bottom:8px;
 		}
 .shared-tax-tip__tax-box--container{
@@ -538,7 +560,7 @@ input::placeholder{
 			width:25%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted #06070B;
 			margin-bottom:8px;
 		}
 .shared-tax-tip__tip fieldset{
@@ -605,8 +627,9 @@ input::placeholder{
 .display-state .person-box{
 		margin:30px;
 		padding:20px;
-		border:1px solid black;
+		border:1px solid #06070B;
 		flex-basis:100%;
+		background-color:rgba(255,231,223, .7);
 	}
 @media(min-width:700px){
 .display-state .person-box{
@@ -616,25 +639,36 @@ input::placeholder{
 .display-state .person-box__tip-subtotal{
 			width:70%;
 			margin:0 auto;
-			border-bottom:1px dashed black;
+			border-bottom:1px dashed #06070B;
 		}
 .display-state .grand-totals{
+		background-color:rgba(255,231,223, .7);
 		flex-basis:100%;
+		border:1px solid #06070B;
+		margin-left:5%;
+		margin-right:5%;
+	}
+@media(min-width:700px){
+.display-state .grand-totals{
+			margin-left:10%;
+			margin-right:10%
+	}
 	}
 .display-state .grand-totals__tip-total{
 			width:50%;
 			margin:0 auto;
-			border-bottom:1px dashed black;
+			border-bottom:1px dashed #06070B;
 		}
 .split-evenly-state{
 	text-align:center;
 }
 .split-evenly-state .person-box__se{
-		border:1px solid black;
+		border:3px solid #06070B;
 		margin-left:5px;
 		margin-right:5px;
 		padding:10px;
 		margin-bottom:10px;
+		background-color:rgba(255,231,223, .7);
 	}
 .split-evenly-state .person-box__se--main-heading{
 			

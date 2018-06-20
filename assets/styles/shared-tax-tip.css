@@ -1,5 +1,10 @@
 .shared-tax-tip{
-	border:3px solid black;
+	border:3px solid $mainBlack;
+
+	@mixin atLarge{
+		margin-left:10%;
+		margin-right:10%;
+	}	
 
 	&__shared-items{
 
@@ -7,7 +12,7 @@
 			width:50%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted $mainBlack;
 			margin-bottom:8px;
 			display:block;
 		}
@@ -52,7 +57,7 @@
 			width:25%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted $mainBlack;
 			margin-bottom:8px;
 		}
 
@@ -73,7 +78,7 @@
 			width:25%;
 			text-align:center;
 			margin:0 auto;
-			border-bottom:3px dotted black;
+			border-bottom:3px dotted $mainBlack;
 			margin-bottom:8px;
 		}
 

@@ -11,8 +11,9 @@
 	& .person-box{
 		margin:30px;
 		padding:20px;
-		border:1px solid black;
+		border:1px solid $mainBlack;
 		flex-basis:100%;
+		background-color:$mainPeachA;
 
 		@mixin atMedium{
 			flex-basis:20%;
@@ -22,17 +23,26 @@
 		&__tip-subtotal{
 			width:70%;
 			margin:0 auto;
-			border-bottom:1px dashed black;
+			border-bottom:1px dashed $mainBlack;
 		}
 	}
 
 	& .grand-totals{
+		background-color:$mainPeachA;
 		flex-basis:100%;
+		border:1px solid $mainBlack;
+		margin-left:5%;
+		margin-right:5%;
+
+		@mixin atMedium{
+			margin-left:10%;
+			margin-right:10%;
+		}
 
 		&__tip-total{
 			width:50%;
 			margin:0 auto;
-			border-bottom:1px dashed black;
+			border-bottom:1px dashed $mainBlack;
 		}
 	}
 
