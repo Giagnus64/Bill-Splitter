@@ -25,16 +25,16 @@ class UI{
 			html += `<form class="person person${i}"><div class="person__border">
 				<div>
 					<label for="name">Name:</label>
-					<input type="text" class="name" name="name" placeholder="Person ${i}">
+					<input type="text" class="name" name="name" value="Person ${i}">
 				</div>
 				<div data-item-number="1">
 					<label for="item1">Item 1:</label>
-					<input type="number" class="item" name="item1" placeholder="$">
+					<input type="number" class="item" name="item1" value="$">
 				</div>
 				<div data-item-number="2">
 					<label for="item2">Item 2:</label>
 					<input type="number" class="item" name="item2"
-					placeholder="$">
+					value="$">
 				</div>
 				<input type="button" class="add-item btn" value="Add Item">
 				</div>
@@ -75,7 +75,7 @@ class UI{
 	}
 
 	generateSEResults(obj){
-		console.log(obj);
+		//console.log(obj);
 		//pull results from calc via main app callback
 		let html = '';
 		//generate div with results
